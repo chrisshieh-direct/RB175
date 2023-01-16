@@ -1,0 +1,11 @@
+<html>
+  <body>
+  <h1>Directory Contents</h1>
+  <% @directory.each do |file| %>
+    <p><a href="<%= file.split("/")[1] %>"><%= file.split("/")[1] %></a></p>
+  <% end %>
+
+  <h2><a href="/?sort=asc">Sort in ascending order</a></h2>
+  <h2><a href="/?sort=desc">Sort in descending order</a></h2>
+  </body>
+</html>
