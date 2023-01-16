@@ -1,0 +1,26 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+<% if @matches.size > 0 %>
+  <h2 class="content-subhead">Results for '<%= params[:query] %>'</h2>
+  <ul>
+    <% @matches.each do |name, graph_array| %>
+    <li><%= name %>
+      <ul>
+      <% graph_array.each_with_index do |item, idx| %>
+      <% next if idx == 0 %>
+        <li><a href="/chapters/<%= graph_array[0] %>#<%= item[1] %>"><%= highlight(item[0], params[:query]) %></a></li>
+      <% end %>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
+<% elsif @noquery == true %>
+  <p>Enter a search term.</p>
+<% else%>
+  <p>Sorry, no matches were found.</p>
+<% end %>
